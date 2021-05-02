@@ -1,15 +1,14 @@
 package com.atex.financeeducation.viewmodel
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.atex.financeeducation.data.NoteItem
 import com.atex.financeeducation.data.UserInformation
+import com.atex.financeeducation.enums.ChangeAmountState
 import com.example.androidkeyboardstatechecker.showToast
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.MetadataChanges
-import com.google.firebase.firestore.auth.User
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -81,15 +80,73 @@ class CommonViewModel() : ViewModel() {
         return topics
     }
 
-    /* fun updateInformAboutUser(){
-         val washingtonRef = db.collection("cities").document("DC")
+    fun updateFunds(value: Int, type: String, state: ChangeAmountState) {
+        if (state == ChangeAmountState.SET) {
+            users.document(this.email)
+                .update(type, value)
+        } else {
+            users.document(this.email).get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        val prev_value = document.data?.get(type) as Long
+                        when (state) {
+                            ChangeAmountState.ADD -> {
+                                users.document(this.email)
+                                    .update(type, prev_value + value)
+                            }
+                            ChangeAmountState.REDUCE -> {
+                                if (prev_value - value < 0) {
+                                    users.document(this.email)
+                                        .update(type, 0)
+                                } else {
+                                    users.document(this.email)
+                                        .update(type, prev_value - value)
+                                }
+                            }
+                            else -> {
 
- // Set the "isCapital" field of the city 'DC'
-         washingtonRef
-             .update("capital", true)
-             .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
-             .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
-     }*/
+                            }
+                        }
+                    } else {
+
+                    }
+                }
+                .addOnFailureListener { exception ->
+
+                }
+        }
+    }
+
+    /*fun updateUntouchable(value: Int) {
+        val docRef = users.document(this.email)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+
+                    val d = document.data?.get("untouchable") as Long
+                    users.document(this.email)
+                        .update("untouchable", d + value)
+                } else {
+                }
+            }
+            .addOnFailureListener { exception ->
+            }
+    }
+
+    fun updateDaily(value: Int) {
+        val docRef = users.document(this.email)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val d = document.data?.get("daily") as Long
+                    users.document(this.email)
+                        .update("daily", d + value)
+                } else {
+                }
+            }
+            .addOnFailureListener { exception ->
+            }
+    }*/
 
     fun getInformAboutUser(): MutableLiveData<UserInformation> {
         users.document(this.email).addSnapshotListener(MetadataChanges.INCLUDE) { snapshot, e ->

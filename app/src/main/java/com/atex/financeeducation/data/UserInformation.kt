@@ -9,17 +9,18 @@ data class UserInformation(
 )
 
 fun UserInformation.getFundsPercentages(): String {
-    return String.format("%.2f", (funds / getTotalAmount() * 100).toDouble())
+    return String.format("%.2f", (funds.toDouble() / getTotalAmount().toDouble() * 100)) + " %"
 }
 
 fun UserInformation.getUntouchablePercentages(): String {
-    return String.format("%.2f", (untouchable / getTotalAmount() * 100).toDouble())
+    return String.format("%.2f", (untouchable.toDouble() / getTotalAmount() * 100)) + " %"
 }
 
 fun UserInformation.getDailyPercentages(): String {
-    return String.format("%.2f", (daily / getTotalAmount() * 100).toDouble())
+    return String.format("%.2f", (daily.toDouble() / getTotalAmount() * 100)) + " %"
 }
 
 private fun UserInformation.getTotalAmount(): Int {
-    return funds + untouchable + daily
+    val amount = funds + untouchable + daily
+    return if (amount!=0) amount else 1
 }

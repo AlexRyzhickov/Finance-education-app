@@ -53,8 +53,8 @@ class TransactionFragment : Fragment() {
         val procent = args.procent
         expenses = args.expense
 
-        binding.moneyOnAccount.text = "Сумма ₽ $money"
-        binding.procent.text = "$procent%"
+        binding.moneyOnAccount.text = "Сумма ₽ " + money
+        binding.procent.text = procent
 
         binding.addCard.setOnClickListener {
             val action = TransactionFragmentDirections.actionTransactionFragmentToChangeAmountFragment(ChangeAmountState.ADD,args.expense)

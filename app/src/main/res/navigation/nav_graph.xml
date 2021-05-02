@@ -65,9 +65,9 @@
             app:argType="com.atex.financeeducation.enums.Expenses" />
         <argument
             android:name="money"
-            app:argType="integer" />
+            app:argType="string" />
         <argument android:name="procent"
-            app:argType="float" />
+            app:argType="string" />
         <action
             android:id="@+id/action_transactionFragment_to_changeAmountFragment"
             app:destination="@id/changeAmountFragment" />

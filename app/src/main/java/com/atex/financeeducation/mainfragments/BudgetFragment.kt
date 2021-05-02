@@ -1,6 +1,7 @@
 package com.atex.financeeducation.mainfragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,15 +76,15 @@ class BudgetFragment : Fragment() {
         _binding = BudgetFragmentBinding.inflate(inflater,container,false)
 
          binding.cardView.setOnClickListener {
-             openTransactionFragment(Expenses.PIGGY_BANK, userInformation.funds, 25.15f)
+             openTransactionFragment(Expenses.PIGGY_BANK, userInformation.funds.toString(), userInformation.getFundsPercentages())
          }
 
         binding.cardView2.setOnClickListener {
-            openTransactionFragment(Expenses.UNTOUCHABLES,userInformation.untouchable, 25.15f)
+            openTransactionFragment(Expenses.UNTOUCHABLES,userInformation.untouchable.toString(), userInformation.getUntouchablePercentages())
         }
 
         binding.cardView3.setOnClickListener {
-            openTransactionFragment(Expenses.DAILY,userInformation.daily, 25.15f)
+            openTransactionFragment(Expenses.DAILY,userInformation.daily.toString(), userInformation.getDailyPercentages())
         }
 
         activity?.let {
@@ -112,6 +113,9 @@ class BudgetFragment : Fragment() {
                 binding.procent1.setText(userInform.getFundsPercentages())
                 binding.procent2.setText(userInform.getUntouchablePercentages())
                 binding.procent3.setText(userInform.getDailyPercentages())
+//                Log.d("TAG",userInform.getTotalAmount().toString())
+//                Log.d("TAG",userInform.getFundsPercentages().toString())
+
 
 
 
@@ -132,7 +136,7 @@ class BudgetFragment : Fragment() {
         authInterface = context as AutorizationInterface
     }
 
-    fun openTransactionFragment(expense: Expenses, money: Int, procent: Float){
+    fun openTransactionFragment(expense: Expenses, money: String, procent: String){
         val action = BudgetFragmentDirections.actionBudgetFragmentToTransactionFragment(expense, money, procent)
         findNavController().navigate(action)
     }
