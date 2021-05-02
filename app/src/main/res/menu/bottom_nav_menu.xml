@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/budgetFragment"
+        android:icon="@drawable/budget_selector"
+        android:title="Мой бюджет" />
+    <item
+        android:id="@+id/diaryFragment"
+        android:icon="@drawable/diary_selector"
+        android:title="Дневник успеха" />
+
+    <item
+        android:id="@+id/dreamsFragment"
+        android:icon="@drawable/dreams_selector"
+        android:title="Мои мечты" />
+
+    <item
+        android:id="@+id/goalsFragment"
+        android:icon="@drawable/goals_selector"
+        android:title="Шаги к цели" />
+</menu>

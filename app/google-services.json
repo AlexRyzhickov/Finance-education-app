@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "863875692213",
+    "project_id": "finance-education-61b65",
+    "storage_bucket": "finance-education-61b65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863875692213:android:ddb7eb054621f218b970fc",
+        "android_client_info": {
+          "package_name": "com.atex.financeeducation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863875692213-tbekiqkkjrqipv5d8dc07s9bn40rl6en.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChddkgLKLAyAr-_lpY9J3j27QAycsaMWI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863875692213-tbekiqkkjrqipv5d8dc07s9bn40rl6en.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

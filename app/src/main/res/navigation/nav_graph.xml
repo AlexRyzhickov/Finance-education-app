@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/budgetFragment">
+
+
+    <fragment
+        android:id="@+id/budgetFragment"
+        android:name="com.atex.financeeducation.mainfragments.BudgetFragment"
+        android:label="BudgetFragment" >
+        <action
+            android:id="@+id/action_budgetFragment_to_transactionFragment"
+            app:destination="@id/transactionFragment" />
+        <action
+            android:id="@+id/action_budgetFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/diaryFragment"
+        android:name="com.atex.financeeducation.mainfragments.DiaryFragment"
+        android:label="DiaryFragment" >
+        <action
+            android:id="@+id/action_diaryFragment_to_addNoteFragment"
+            app:destination="@id/addNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dreamsFragment"
+        android:name="com.atex.financeeducation.mainfragments.DreamsFragment"
+        android:label="DreamsFragment" />
+    <fragment
+        android:id="@+id/goalsFragment"
+        android:name="com.atex.financeeducation.mainfragments.GoalsFragment"
+        android:label="GoalsFragment" />
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.atex.financeeducation.authentication.SignInFragment"
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_budgetFragment"
+            app:destination="@id/budgetFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.atex.financeeducation.authentication.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionFragment"
+        android:name="com.atex.financeeducation.transactions.TransactionFragment"
+        android:label="TransactionFragment" >
+        <argument
+            android:name="expense"
+            app:argType="com.atex.financeeducation.enums.Expenses" />
+        <argument
+            android:name="money"
+            app:argType="integer" />
+        <argument android:name="procent"
+            app:argType="float" />
+        <action
+            android:id="@+id/action_transactionFragment_to_changeAmountFragment"
+            app:destination="@id/changeAmountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeAmountFragment"
+        android:name="com.atex.financeeducation.transactions.ChangeAmountFragment"
+        android:label="ChangeAmountFragment" >
+        <argument
+            android:name="changeState"
+            app:argType="com.atex.financeeducation.enums.ChangeAmountState" />
+        <argument
+            android:name="expence"
+            app:argType="com.atex.financeeducation.enums.Expenses" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNoteFragment"
+        android:name="com.atex.financeeducation.mainfragments.AddNoteFragment"
+        android:label="AddNoteFragment" />
+</navigation>
