@@ -3,10 +3,12 @@ package com.atex.financeeducation.mainfragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.atex.financeeducation.R
 import com.atex.financeeducation.adapters.SliderAdapter
 import com.atex.financeeducation.data.DreamItem
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.ArrayList
 
 class DreamsFragment : Fragment(R.layout.dreams_fragment) {
@@ -27,5 +29,10 @@ class DreamsFragment : Fragment(R.layout.dreams_fragment) {
         mSlideViewPager = view.findViewById(R.id.SlideViewPager)
         sliderAdapter = SliderAdapter(context, list)
         mSlideViewPager.adapter = sliderAdapter
+
+        view.findViewById<FloatingActionButton>(R.id.add_dream_btn).setOnClickListener {
+            val action =  DreamsFragmentDirections.actionDreamsFragmentToAddDreamFragment()
+            findNavController().navigate(action)
+        }
     }
 }

@@ -38,7 +38,6 @@ class CommonViewModel() : ViewModel() {
             }
     }
 
-
     fun addNotes(
         note_1: String,
         note_2: String,
@@ -116,37 +115,6 @@ class CommonViewModel() : ViewModel() {
                 }
         }
     }
-
-    /*fun updateUntouchable(value: Int) {
-        val docRef = users.document(this.email)
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-
-                    val d = document.data?.get("untouchable") as Long
-                    users.document(this.email)
-                        .update("untouchable", d + value)
-                } else {
-                }
-            }
-            .addOnFailureListener { exception ->
-            }
-    }
-
-    fun updateDaily(value: Int) {
-        val docRef = users.document(this.email)
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    val d = document.data?.get("daily") as Long
-                    users.document(this.email)
-                        .update("daily", d + value)
-                } else {
-                }
-            }
-            .addOnFailureListener { exception ->
-            }
-    }*/
 
     fun getInformAboutUser(): MutableLiveData<UserInformation> {
         users.document(this.email).addSnapshotListener(MetadataChanges.INCLUDE) { snapshot, e ->

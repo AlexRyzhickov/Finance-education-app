@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.atex.financeeducation.R
 import com.atex.financeeducation.databinding.ChangeAmountFragmentBinding
@@ -90,6 +91,8 @@ class ChangeAmountFragment : Fragment(), KeybordStateListener {
                 getExpenseType(args.expence),
                 args.changeState
             )
+            val action = ChangeAmountFragmentDirections.actionChangeAmountFragmentToBudgetFragment()
+            findNavController().navigate(action)
         }
 
         return binding.root
