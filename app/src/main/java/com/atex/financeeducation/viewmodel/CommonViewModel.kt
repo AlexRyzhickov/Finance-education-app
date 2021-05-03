@@ -3,19 +3,24 @@ package com.atex.financeeducation.viewmodel
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.atex.financeeducation.data.DreamItem
 import com.atex.financeeducation.data.NoteItem
 import com.atex.financeeducation.data.UserInformation
 import com.atex.financeeducation.enums.ChangeAmountState
 import com.example.androidkeyboardstatechecker.showToast
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.MetadataChanges
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import android.net.Uri
 import java.util.*
 
 class CommonViewModel() : ViewModel() {
 
     private val db = FirebaseFirestore.getInstance()
+    private val storage = FirebaseStorage.getInstance()
     private val users = db.collection("Users")
     private var topics: MutableLiveData<List<NoteItem>> = MutableLiveData<List<NoteItem>>()
     var email: String = "none"
@@ -122,6 +127,33 @@ class CommonViewModel() : ViewModel() {
             userInf.value = user ?: UserInformation()
         }
         return userInf
+    }
+
+    private fun uploadFile(dream: DreamItem, uri: Uri) {
+        val currentDate = Date()
+        val dateFormat: DateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        val timeFormat: DateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        val date = dateFormat.format(currentDate)
+        val time = timeFormat.format(currentDate)
+
+        var imagesRef = storage.reference.child("images/mountains.jpg")
+        var uploadTask = imagesRef.putFile(uri)
+
+        val urlTask = uploadTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            imagesRef.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val downloadUri = task.result
+            } else {
+
+            }
+        }
+
     }
 
 }
