@@ -10,17 +10,17 @@ import com.atex.financeeducation.enums.ChangeAmountState
 import com.example.androidkeyboardstatechecker.showToast
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.MetadataChanges
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import android.net.Uri
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import java.util.*
 
 class CommonViewModel() : ViewModel() {
 
     private val db = FirebaseFirestore.getInstance()
-    private val storage = FirebaseStorage.getInstance()
+    private val storage = Firebase.storage
     private val users = db.collection("Users")
     private var topics: MutableLiveData<List<NoteItem>> = MutableLiveData<List<NoteItem>>()
     var email: String = "none"
@@ -129,15 +129,18 @@ class CommonViewModel() : ViewModel() {
         return userInf
     }
 
-    private fun uploadFile(dream: DreamItem, uri: Uri) {
+    fun createDream(dreamName: String, dreamCost: Int, link: String, uri: Uri) {
         val currentDate = Date()
         val dateFormat: DateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         val timeFormat: DateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         val date = dateFormat.format(currentDate)
         val time = timeFormat.format(currentDate)
 
-        var imagesRef = storage.reference.child("images/mountains.jpg")
-        var uploadTask = imagesRef.putFile(uri)
+        val docId = "${dreamName}-${date}-${time}"
+        val storeId = "${this.email}/$docId"
+
+        val imagesRef = storage.reference.child(storeId)
+        val uploadTask = imagesRef.putFile(uri)
 
         val urlTask = uploadTask.continueWithTask { task ->
             if (!task.isSuccessful) {
@@ -149,6 +152,8 @@ class CommonViewModel() : ViewModel() {
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val downloadUri = task.result
+                users.document(this.email).collection("dreams").document(docId)
+                    .set(DreamItem(dreamName, dreamCost, downloadUri.toString(), link, date, time))
             } else {
 
             }

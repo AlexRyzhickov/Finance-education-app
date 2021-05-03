@@ -24,7 +24,7 @@ class SignInFragment : Fragment() {
     ): View? {
         _binding = SignInFragmentBinding.inflate(inflater,container,false)
 
-        activity?.let {
+        activity?.let{
             instantiateNavigationInterface(it)
         }
 
