@@ -10,19 +10,74 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.startActivity
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import com.atex.financeeducation.R
 import com.atex.financeeducation.data.DreamItem
 import com.bumptech.glide.Glide
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
 
 class SliderAdapter(
     var context: Context?,
-    var listDreams: List<DreamItem>
-) : PagerAdapter() {
+    /*var listDreams: List<DreamItem>,*/
+    options: FirestoreRecyclerOptions<DreamItem>
+) : FirestoreRecyclerAdapter<DreamItem, SliderAdapter.ViewHolder>(options) {
 
-    override fun getCount(): Int {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(
+            R.layout.slide_layout,
+            parent, false
+        )
+        return ViewHolder(itemView)
+    }
+
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int,
+        model: DreamItem
+    ) {
+        holder.slideDescription.setText(model.dreamName)
+        val costString = model.dreamCost.toString()
+        holder.cost.text = "$costString ₽"
+        Glide
+            .with(context!!)
+            .load(model.imgUrl)
+            .into(holder.slideImageView);
+
+        holder.linkBtn.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(model.link))
+            startActivity(context!!,browserIntent,null)
+        }
+    }
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        //        val img: ImageView
+//        val name: TextView
+        val slideImageView: ImageView
+        val slideDescription: TextView
+        val cost: TextView
+        val linkBtn: TextView
+
+        init {
+            slideImageView = itemView.findViewById<ImageView>(R.id.img)
+            slideDescription = itemView.findViewById<TextView>(R.id.name)
+            cost = itemView.findViewById<TextView>(R.id.cost)
+            linkBtn = itemView.findViewById<TextView>(R.id.linkBtn)
+//            img = itemView.findViewById<ImageView>(R.id.img)
+//            name = itemView.findViewById<TextView>(R.id.name)
+        }
+    }
+
+    /*override fun getCount(): Int {
         return listDreams.size
+    }
+
+    fun setList(dreams: List<DreamItem>){
+        listDreams = dreams
+        notifyDataSetChanged()
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -58,6 +113,6 @@ class SliderAdapter(
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as ConstraintLayout)
-    }
+    }*/
 
 }

@@ -22,9 +22,10 @@ class CommonViewModel() : ViewModel() {
     private val db = FirebaseFirestore.getInstance()
     private val storage = Firebase.storage
     private val users = db.collection("Users")
-    private var topics: MutableLiveData<List<NoteItem>> = MutableLiveData<List<NoteItem>>()
+    private var notes: MutableLiveData<List<NoteItem>> = MutableLiveData<List<NoteItem>>()
     var email: String = "none"
     private var userInf: MutableLiveData<UserInformation> = MutableLiveData<UserInformation>()
+    private var dreams: MutableLiveData<List<DreamItem>> = MutableLiveData<List<DreamItem>>()
 
     fun addUser(email: String, username: String, context: Context?) {
         val data = hashMapOf(
@@ -79,9 +80,9 @@ class CommonViewModel() : ViewModel() {
                     val user: NoteItem = topic.document.toObject(NoteItem::class.java)
                     list.add(user)
                 }
-                topics.value = list
+                notes.value = list
             }
-        return topics
+        return notes
     }
 
     fun updateFunds(value: Int, type: String, state: ChangeAmountState) {
@@ -159,6 +160,19 @@ class CommonViewModel() : ViewModel() {
             }
         }
 
+    }
+
+    fun getDreams(): MutableLiveData<List<DreamItem>> {
+        users.document(this.email).collection("dreams")
+            .addSnapshotListener { value, error ->
+                val list: MutableList<DreamItem> = ArrayList<DreamItem>()
+                for (topic in value!!.documentChanges) {
+                    val dream: DreamItem = topic.document.toObject(DreamItem::class.java)
+                    list.add(dream)
+                }
+                dreams.value = list
+            }
+        return dreams
     }
 
 }

@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity(), AutorizationInterface {
         val graph = inflater.inflate(R.navigation.nav_graph)
 
         viewModel = ViewModelProvider(this).get(CommonViewModel::class.java)
+        viewModel.getDreams()
 
         lifecycleScope.launch {
             val value = read("email")

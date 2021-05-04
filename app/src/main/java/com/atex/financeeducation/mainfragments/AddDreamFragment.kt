@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.atex.financeeducation.R
 import com.atex.financeeducation.viewmodel.CommonViewModel
 
@@ -40,17 +41,21 @@ class AddDreamFragment : Fragment(R.layout.add_dream_fragment) {
         }
 
         view.findViewById<Button>(R.id.create_dream_btn).setOnClickListener {
-            val name = dreamName.text.toString()
-            val cost = dreamCost.text.toString().toInt()
-            val link = dreamLink.text.toString()
-            if (!name.equals("") && cost >= 0 && !link.equals("")) {
-                uri?.let {
-                    viewModel.createDream(
-                        dreamName.text.toString(),
-                        dreamCost.text.toString().toInt(),
-                        dreamLink.text.toString(),
-                        it
-                    )
+            val costString = dreamCost.text.toString()
+            if (!costString.equals("")) {
+                val name = dreamName.text.toString()
+                val cost = costString.toInt()
+                val link = dreamLink.text.toString()
+                if (!name.equals("") && cost >= 0 && !link.equals("")) {
+                    uri?.let {
+                        viewModel.createDream(
+                            dreamName.text.toString(),
+                            dreamCost.text.toString().toInt(),
+                            dreamLink.text.toString(),
+                            it
+                        )
+                    }
+                    findNavController().popBackStack()
                 }
             }
         }

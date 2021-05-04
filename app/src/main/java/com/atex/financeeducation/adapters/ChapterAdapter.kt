@@ -10,14 +10,17 @@ import com.atex.financeeducation.R
 import com.atex.financeeducation.data.DreamItem
 import com.atex.financeeducation.mainfragments.BudgetFragment
 import com.bumptech.glide.Glide
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
 
 class ChapterAdapter(
-    private var dreamList: List<DreamItem>,
-//    private val listener: OnItemClickListener,
-    private val context: BudgetFragment
+    private val context: BudgetFragment, options: FirestoreRecyclerOptions<DreamItem>
 ) :
-    RecyclerView.Adapter<ChapterAdapter.ViewHolder>() {
+    FirestoreRecyclerAdapter<DreamItem, ChapterAdapter.ViewHolder>(options)
+    /*RecyclerView.Adapter<ChapterAdapter.ViewHolder>()*/ {
+
+//    private var dreamList: List<DreamItem> = ArrayList<DreamItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
@@ -27,7 +30,7 @@ class ChapterAdapter(
         return ViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+   /* override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = dreamList[position]
         if (currentItem.dreamName.length <= 15) {
             holder.name.text = currentItem.dreamName
@@ -39,11 +42,16 @@ class ChapterAdapter(
             .load(currentItem.imgUrl)
             .into(holder.img);
 
-    }
+    }*/
 
-    override fun getItemCount(): Int {
+ /*   override fun getItemCount(): Int {
         return dreamList.size
-    }
+    }*/
+
+/*    fun setList(dreams: List<DreamItem>){
+        dreamList = dreams
+        notifyDataSetChanged()
+    }*/
 
 //    fun setChapterList(list: List<ChapterItem>) {
 //        dreamList = list
@@ -74,5 +82,17 @@ class ChapterAdapter(
             img = itemView.findViewById<ImageView>(R.id.img)
             name = itemView.findViewById<TextView>(R.id.name)
         }
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, model: DreamItem) {
+        if (model.dreamName.length <= 15) {
+            holder.name.text = model.dreamName
+        }else{
+            holder.name.text = model.dreamName.substring(0,12) + ".."
+        }
+        Glide
+            .with(context)
+            .load(model.imgUrl)
+            .into(holder.img);
     }
 }

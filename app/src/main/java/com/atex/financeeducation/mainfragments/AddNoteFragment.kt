@@ -11,10 +11,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager.widget.ViewPager
 import com.atex.financeeducation.R
-import com.atex.financeeducation.adapters.SliderAdapter
-import com.atex.financeeducation.data.DreamItem
 import com.atex.financeeducation.viewmodel.CommonViewModel
 import java.util.ArrayList
 
