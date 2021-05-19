@@ -1,9 +1,7 @@
 package com.atex.financeeducation.mainfragments
 
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Note
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -19,13 +17,13 @@ import com.atex.financeeducation.data.*
 import com.atex.financeeducation.databinding.BudgetFragmentBinding
 import com.atex.financeeducation.enums.Expenses
 import com.atex.financeeducation.interfaces.AutorizationInterface
+import com.atex.financeeducation.interfaces.ChangeBottomNavView
 import com.atex.financeeducation.viewmodel.CommonViewModel
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.MetadataChanges
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 
 
 class BudgetFragment : Fragment() {
@@ -38,6 +36,7 @@ class BudgetFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var authInterface: AutorizationInterface
+    private lateinit var changeBotNavViewInterface: ChangeBottomNavView
 
     private lateinit var viewModel: CommonViewModel
     private lateinit var userInformation: UserInformation
@@ -97,7 +96,7 @@ class BudgetFragment : Fragment() {
             authInterface.signOut()
             val action = BudgetFragmentDirections.actionBudgetFragmentToSignInFragment()
             findNavController().navigate(action)
-            authInterface.hideBottomNavView()
+            changeBotNavViewInterface.hideBottomNavView()
         }
 
         return binding.root
@@ -134,6 +133,7 @@ class BudgetFragment : Fragment() {
 
     private fun instantiateNavigationInterface(context: FragmentActivity) {
         authInterface = context as AutorizationInterface
+        changeBotNavViewInterface = context as ChangeBottomNavView
     }
 
     fun openTransactionFragment(expense: Expenses, money: String, procent: String) {

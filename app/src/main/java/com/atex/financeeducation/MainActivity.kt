@@ -19,6 +19,7 @@ import androidx.navigation.ui.NavigationUI
 import com.atex.financeeducation.authentication.SignInFragmentDirections
 import com.atex.financeeducation.authentication.SignUpFragmentDirections
 import com.atex.financeeducation.interfaces.AutorizationInterface
+import com.atex.financeeducation.interfaces.ChangeBottomNavView
 import com.atex.financeeducation.transactions.ChangeAmountFragment
 import com.atex.financeeducation.viewmodel.CommonViewModel
 import com.example.androidkeyboardstatechecker.KeyboardEventListener
@@ -28,7 +29,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 
-class MainActivity : AppCompatActivity(), AutorizationInterface {
+class MainActivity : AppCompatActivity(), AutorizationInterface, ChangeBottomNavView {
 
     lateinit var mAuth: FirebaseAuth
     lateinit var bottomNavigationView: BottomNavigationView
@@ -168,7 +169,11 @@ class MainActivity : AppCompatActivity(), AutorizationInterface {
     }
 
     override fun hideBottomNavView() {
-        bottomNavigationView.visibility = View.INVISIBLE
+        bottomNavigationView.visibility = View.GONE
+    }
+
+    override fun showBottomNavView() {
+        bottomNavigationView.visibility = View.VISIBLE
     }
 
     override fun onResume() {

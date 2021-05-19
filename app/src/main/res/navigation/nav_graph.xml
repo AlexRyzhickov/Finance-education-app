@@ -34,11 +34,27 @@
         <action
             android:id="@+id/action_dreamsFragment_to_addDreamFragment"
             app:destination="@id/addDreamFragment" />
+        <action
+            android:id="@+id/action_dreamsFragment_to_goalsFragment"
+            app:destination="@id/goalsFragment" />
     </fragment>
     <fragment
         android:id="@+id/goalsFragment"
         android:name="com.atex.financeeducation.mainfragments.GoalsFragment"
-        android:label="GoalsFragment" />
+        android:label="GoalsFragment" >
+        <action
+            android:id="@+id/action_goalsFragment_to_addGoalFragment"
+            app:destination="@id/addGoalFragment" />
+        <argument
+            android:name="createDate"
+            app:argType="string" />
+        <argument
+            android:name="createTime"
+            app:argType="string" />
+        <argument
+            android:name="dreamName"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.atex.financeeducation.authentication.SignInFragment"
@@ -100,4 +116,12 @@
         android:id="@+id/addDreamFragment"
         android:name="com.atex.financeeducation.mainfragments.AddDreamFragment"
         android:label="AddDreamFragment" />
+    <fragment
+        android:id="@+id/addGoalFragment"
+        android:name="com.atex.financeeducation.mainfragments.AddGoalFragment"
+        android:label="AddGoalFragment" >
+        <argument
+            android:name="goalDocName"
+            app:argType="string" />
+    </fragment>
 </navigation>

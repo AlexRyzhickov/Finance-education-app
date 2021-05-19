@@ -5,26 +5,24 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.atex.financeeducation.R
 import com.atex.financeeducation.adapters.SliderAdapter
 import com.atex.financeeducation.data.DreamItem
-import com.atex.financeeducation.data.NoteItem
 import com.atex.financeeducation.viewmodel.CommonViewModel
+import com.example.androidkeyboardstatechecker.showToast
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
-import java.util.ArrayList
 
-class DreamsFragment : Fragment(R.layout.dreams_fragment) {
+class DreamsFragment : Fragment(R.layout.dreams_fragment), SliderAdapter.OnItemClickListener {
 
     private lateinit var mSlideViewPager: ViewPager2
     private lateinit var sliderAdapter: SliderAdapter
-//    private var list = ArrayList<DreamItem>()
+
+    //    private var list = ArrayList<DreamItem>()
     private lateinit var viewModel: CommonViewModel
 
     private val db = Firebase.firestore
@@ -48,7 +46,7 @@ class DreamsFragment : Fragment(R.layout.dreams_fragment) {
 
 
         mSlideViewPager = view.findViewById(R.id.SlideViewPager)
-        sliderAdapter = SliderAdapter(context, options)
+        sliderAdapter = SliderAdapter(context, this, options)
         mSlideViewPager.adapter = sliderAdapter
 
         view.findViewById<FloatingActionButton>(R.id.add_dream_btn).setOnClickListener {
@@ -65,5 +63,15 @@ class DreamsFragment : Fragment(R.layout.dreams_fragment) {
     override fun onStop() {
         super.onStop()
         sliderAdapter.stopListening()
+    }
+
+    override fun onItemClick(createDate: String, createTime: String, dreamName: String) {
+//        context?.showToast(position.toString())
+        val action = DreamsFragmentDirections.actionDreamsFragmentToGoalsFragment(
+            createDate = createDate,
+            createTime = createTime,
+            dreamName = dreamName
+        )
+        findNavController().navigate(action)
     }
 }

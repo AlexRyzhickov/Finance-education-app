@@ -35,7 +35,8 @@ class TransactionFragment : Fragment() {
                 binding.transactionTitle.text = "Неприкосновенные"
                 binding.transactionImg.setImageResource(R.drawable.safe_box)
                 binding.writeOffCard.visibility = View.GONE
-                binding.addCard.visibility = View.GONE
+//                binding.addCard.visibility = View.GONE
+                binding.transferCard.visibility = View.GONE
             }
             Expenses.DAILY -> {
                 Toast.makeText(context,"DAILY",Toast.LENGTH_SHORT).show()

@@ -6,6 +6,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +22,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
 class SliderAdapter(
     var context: Context?,
-    /*var listDreams: List<DreamItem>,*/
+    private val listener: OnItemClickListener,
     options: FirestoreRecyclerOptions<DreamItem>
 ) : FirestoreRecyclerAdapter<DreamItem, SliderAdapter.ViewHolder>(options) {
 
@@ -49,8 +50,13 @@ class SliderAdapter(
 
         holder.linkBtn.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(model.link))
-            startActivity(context!!,browserIntent,null)
+            startActivity(context!!, browserIntent, null)
         }
+
+        holder.goalsBtn.setOnClickListener {
+            listener.onItemClick(model.createDate, model.createTime, model.dreamName)
+        }
+
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -59,16 +65,22 @@ class SliderAdapter(
         val slideImageView: ImageView
         val slideDescription: TextView
         val cost: TextView
-        val linkBtn: TextView
+        val linkBtn: Button
+        val goalsBtn: Button
 
         init {
             slideImageView = itemView.findViewById<ImageView>(R.id.img)
             slideDescription = itemView.findViewById<TextView>(R.id.name)
             cost = itemView.findViewById<TextView>(R.id.cost)
-            linkBtn = itemView.findViewById<TextView>(R.id.linkBtn)
+            linkBtn = itemView.findViewById<Button>(R.id.linkBtn)
+            goalsBtn = itemView.findViewById(R.id.goalsBtn)
 //            img = itemView.findViewById<ImageView>(R.id.img)
 //            name = itemView.findViewById<TextView>(R.id.name)
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(createDate: String, createTime: String, dreamName: String)
     }
 
     /*override fun getCount(): Int {
