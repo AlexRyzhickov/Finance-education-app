@@ -45,7 +45,7 @@
         app:srcCompat="@drawable/start_icon" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/dreamName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -55,14 +55,14 @@
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/dreamDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:elevation="4dp"
         android:text="Дата создания: 21.02.21"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintStart_toStartOf="@+id/dreamName"
+        app:layout_constraintTop_toBottomOf="@+id/dreamName" />
 
     <Button
         android:id="@+id/button"
