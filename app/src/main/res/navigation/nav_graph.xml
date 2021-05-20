@@ -121,7 +121,7 @@
         android:name="com.atex.financeeducation.mainfragments.AddGoalFragment"
         android:label="AddGoalFragment" >
         <argument
-            android:name="goalDocName"
+            android:name="docId"
             app:argType="string" />
     </fragment>
 </navigation>
