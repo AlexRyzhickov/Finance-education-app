@@ -14,6 +14,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import android.net.Uri
 import com.atex.financeeducation.data.GoalItem
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.util.*
@@ -163,13 +164,13 @@ class CommonViewModel() : ViewModel() {
 
     }
 
-    fun createGoal(docId: String,text: String){
+    fun createGoal(docId: String, text: String) {
         val currentDate = Date()
         val dateFormat: DateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         val date = dateFormat.format(currentDate)
 
         users.document(this.email).collection("dreams").document(docId).collection("goals")
-            .document().set(GoalItem(date,text))
+            .document().set(GoalItem(date, text))
     }
 
     fun getDreams(): MutableLiveData<List<DreamItem>> {
@@ -183,6 +184,14 @@ class CommonViewModel() : ViewModel() {
                 dreams.value = list
             }
         return dreams
+    }
+
+    fun updateGoal(ref: DocumentReference) {
+        ref.get()
+            .addOnSuccessListener { document ->
+                val isDone = document.data?.get("done") as Boolean
+                ref.update("done", !isDone)
+            }
     }
 
 }
