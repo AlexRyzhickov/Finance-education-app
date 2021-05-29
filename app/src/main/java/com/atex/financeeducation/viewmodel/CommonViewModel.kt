@@ -194,4 +194,8 @@ class CommonViewModel() : ViewModel() {
             }
     }
 
+    fun deleteDream(docId: String){
+        users.document(this.email).collection("dreams").document(docId).delete()
+    }
+
 }

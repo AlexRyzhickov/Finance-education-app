@@ -79,8 +79,8 @@ class ChapterAdapter(
         var img: ImageView
         var name: TextView
         init {
-            img = itemView.findViewById<ImageView>(R.id.img)
-            name = itemView.findViewById<TextView>(R.id.name)
+            img = itemView.findViewById<ImageView>(R.id.receiving_dream_img)
+            name = itemView.findViewById<TextView>(R.id.receiving_dream_name)
         }
     }
 

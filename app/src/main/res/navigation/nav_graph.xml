@@ -54,6 +54,15 @@
         <argument
             android:name="dreamName"
             app:argType="string" />
+        <argument
+            android:name="dreamCost"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_goalsFragment_to_receivingFragment"
+            app:destination="@id/receivingFragment" />
+        <argument
+            android:name="imgUrl"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
@@ -122,6 +131,28 @@
         android:label="AddGoalFragment" >
         <argument
             android:name="docId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/receivingFragment"
+        android:name="com.atex.financeeducation.mainfragments.ReceivingFragment"
+        android:label="ReceivingFragment" >
+        <argument
+            android:name="dreamName"
+            app:argType="string" />
+        <argument
+            android:name="dreamCost"
+            app:argType="integer" />
+        <argument
+            android:name="dreamImgUrl"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_receivingFragment_to_budgetFragment"
+            app:destination="@id/budgetFragment"
+            app:popUpTo="@id/budgetFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="storeId"
             app:argType="string" />
     </fragment>
 </navigation>

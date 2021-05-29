@@ -9,15 +9,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.PagerAdapter
 import com.atex.financeeducation.R
 import com.atex.financeeducation.data.DreamItem
 import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.DocumentReference
 
 
 class SliderAdapter(
@@ -54,14 +53,17 @@ class SliderAdapter(
         }
 
         holder.goalsBtn.setOnClickListener {
-            listener.onItemClick(model.createDate, model.createTime, model.dreamName)
+            listener.onItemClick(model.createDate, model.createTime, model.dreamName, model.dreamCost, model.imgUrl)
         }
 
     }
 
+    fun getItemRef(position: Int): DocumentReference {
+        return getSnapshots().getSnapshot(position).getReference()
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        //        val img: ImageView
-//        val name: TextView
+
         val slideImageView: ImageView
         val slideDescription: TextView
         val cost: TextView
@@ -69,62 +71,16 @@ class SliderAdapter(
         val goalsBtn: Button
 
         init {
-            slideImageView = itemView.findViewById<ImageView>(R.id.img)
-            slideDescription = itemView.findViewById<TextView>(R.id.name)
-            cost = itemView.findViewById<TextView>(R.id.cost)
+            slideImageView = itemView.findViewById<ImageView>(R.id.receiving_dream_img)
+            slideDescription = itemView.findViewById<TextView>(R.id.receiving_dream_name)
+            cost = itemView.findViewById<TextView>(R.id.receiving_dream_cost)
             linkBtn = itemView.findViewById<Button>(R.id.linkBtn)
             goalsBtn = itemView.findViewById(R.id.goalsBtn)
-//            img = itemView.findViewById<ImageView>(R.id.img)
-//            name = itemView.findViewById<TextView>(R.id.name)
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(createDate: String, createTime: String, dreamName: String)
+        fun onItemClick(createDate: String, createTime: String, dreamName: String, dreamCost: Int, imgUrl: String)
     }
-
-    /*override fun getCount(): Int {
-        return listDreams.size
-    }
-
-    fun setList(dreams: List<DreamItem>){
-        listDreams = dreams
-        notifyDataSetChanged()
-    }
-
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view === `object` as ConstraintLayout
-    }
-
-    override fun instantiateItem(container: ViewGroup, position: Int): View {
-        val layoutInflater =
-            context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view: View = layoutInflater.inflate(R.layout.slide_layout, container, false)
-
-        val slideImageView = view.findViewById<ImageView>(R.id.img)
-        val slideDescription = view.findViewById<TextView>(R.id.name)
-        val cost = view.findViewById<TextView>(R.id.cost)
-        val linkBtn = view.findViewById<TextView>(R.id.linkBtn)
-
-        slideDescription.setText(listDreams[position].dreamName)
-        val costString = listDreams[position].dreamCost.toString()
-        cost.text = "$costString ₽"
-        Glide
-            .with(context!!)
-            .load(listDreams[position].imgUrl)
-            .into(slideImageView);
-
-        linkBtn.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(listDreams[position].link))
-            startActivity(context!!,browserIntent,null)
-        }
-
-        container.addView(view)
-        return view
-    }
-
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView(`object` as ConstraintLayout)
-    }*/
 
 }

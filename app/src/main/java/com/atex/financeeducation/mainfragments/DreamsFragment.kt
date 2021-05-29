@@ -65,12 +65,14 @@ class DreamsFragment : Fragment(R.layout.dreams_fragment), SliderAdapter.OnItemC
         sliderAdapter.stopListening()
     }
 
-    override fun onItemClick(createDate: String, createTime: String, dreamName: String) {
+    override fun onItemClick(createDate: String, createTime: String, dreamName: String, dreamCost: Int, imgUrl: String) {
 //        context?.showToast(position.toString())
         val action = DreamsFragmentDirections.actionDreamsFragmentToGoalsFragment(
             createDate = createDate,
             createTime = createTime,
-            dreamName = dreamName
+            dreamName = dreamName,
+            dreamCost = dreamCost,
+            imgUrl = imgUrl
         )
         findNavController().navigate(action)
     }

@@ -20,6 +20,8 @@ import com.atex.financeeducation.authentication.SignInFragmentDirections
 import com.atex.financeeducation.authentication.SignUpFragmentDirections
 import com.atex.financeeducation.interfaces.AutorizationInterface
 import com.atex.financeeducation.interfaces.ChangeBottomNavView
+import com.atex.financeeducation.interfaces.IOnBackPressed
+import com.atex.financeeducation.mainfragments.ReceivingFragment
 import com.atex.financeeducation.transactions.ChangeAmountFragment
 import com.atex.financeeducation.viewmodel.CommonViewModel
 import com.example.androidkeyboardstatechecker.KeyboardEventListener
@@ -51,7 +53,8 @@ class MainActivity : AppCompatActivity(), AutorizationInterface, ChangeBottomNav
 
         mAuth = FirebaseAuth.getInstance()
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val inflater = navHostFragment.navController.navInflater
         val graph = inflater.inflate(R.navigation.nav_graph)
 
@@ -60,12 +63,13 @@ class MainActivity : AppCompatActivity(), AutorizationInterface, ChangeBottomNav
 
         lifecycleScope.launch {
             val value = read("email")
-            viewModel.email =  value ?: "none"
+            viewModel.email = value ?: "none"
 
             Toast.makeText(applicationContext, "!" + value + "!", Toast.LENGTH_SHORT).show()
-            Toast.makeText(applicationContext, "?" + viewModel.email + "?", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "?" + viewModel.email + "?", Toast.LENGTH_SHORT)
+                .show()
 
-            if (value==null || value.equals("none")) {
+            if (value == null || value.equals("none")) {
                 graph.startDestination = R.id.signInFragment
             } else {
                 graph.startDestination = R.id.budgetFragment
@@ -162,7 +166,7 @@ class MainActivity : AppCompatActivity(), AutorizationInterface, ChangeBottomNav
         }
     }
 
-    override fun signOut(){
+    override fun signOut() {
         lifecycleScope.launch {
             save("email", "none")
         }
@@ -197,6 +201,22 @@ class MainActivity : AppCompatActivity(), AutorizationInterface, ChangeBottomNav
         val dataStoreKey = preferencesKey<String>(key)
         val preferences = dataStore.data.first()
         return preferences[dataStoreKey]
+    }
+
+    override fun onBackPressed() {
+        val fragment = this.supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as? NavHostFragment
+        val currentFragment = fragment?.childFragmentManager?.fragments?.get(0) as? ReceivingFragment
+
+        if (currentFragment==null){
+            super.onBackPressed()
+        }else {
+            (currentFragment as? IOnBackPressed)?.onBackPressed()?.takeIf {
+                !it
+            }?.let {
+                showBottomNavView()
+//                super.onBackPressed()
+            }
+        }
     }
 
 }

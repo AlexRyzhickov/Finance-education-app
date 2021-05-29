@@ -15,7 +15,7 @@
         android:layout_height="164dp">
 
         <ImageView
-            android:id="@+id/img"
+            android:id="@+id/receiving_dream_img"
             android:layout_width="0dp"
             android:layout_height="140dp"
             android:scaleType="fitCenter"
@@ -25,7 +25,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/receiving_dream_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
