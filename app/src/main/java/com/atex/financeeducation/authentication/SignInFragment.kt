@@ -39,7 +39,7 @@ class SignInFragment : Fragment() {
         }
 
         binding.signInBtn.setOnClickListener {
-            val email = binding.email.text.toString()
+            val email = binding.email.text.toString().trim()
             val password = binding.password.text.toString()
             authInterface.signIn(email, password)
         }

@@ -65,10 +65,6 @@ class MainActivity : AppCompatActivity(), AutorizationInterface, ChangeBottomNav
             val value = read("email")
             viewModel.email = value ?: "none"
 
-            Toast.makeText(applicationContext, "!" + value + "!", Toast.LENGTH_SHORT).show()
-            Toast.makeText(applicationContext, "?" + viewModel.email + "?", Toast.LENGTH_SHORT)
-                .show()
-
             if (value == null || value.equals("none")) {
                 graph.startDestination = R.id.signInFragment
             } else {
@@ -90,12 +86,12 @@ class MainActivity : AppCompatActivity(), AutorizationInterface, ChangeBottomNav
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     viewModel.addUser(email, nickname, applicationContext)
-                    Toast.makeText(this, "createUserWithEmail:success", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "Пользователь успешно добавлен", Toast.LENGTH_SHORT)
                         .show()
                     val action = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment()
                     findNavController(R.id.nav_host_fragment).navigate(action)
                 } else {
-                    Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Регестрация не удалась", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -106,8 +102,7 @@ class MainActivity : AppCompatActivity(), AutorizationInterface, ChangeBottomNav
             mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-//                            val user = auth.currentUser
-                        Toast.makeText(this, "signInWithEmail:success", Toast.LENGTH_SHORT)
+                        Toast.makeText(this, "Добро пожаловать !", Toast.LENGTH_SHORT)
                             .show()
                         bottomNavigationView.visibility = View.VISIBLE
                         lifecycleScope.launch {
@@ -117,7 +112,7 @@ class MainActivity : AppCompatActivity(), AutorizationInterface, ChangeBottomNav
                         val action = SignInFragmentDirections.actionSignInFragmentToBudgetFragment()
                         findNavController(R.id.nav_host_fragment).navigate(action)
                     } else {
-                        Toast.makeText(this, "signInWithEmail:failure", Toast.LENGTH_SHORT)
+                        Toast.makeText(this, "Аутентификация не удалась", Toast.LENGTH_SHORT)
                             .show()
                     }
                 }

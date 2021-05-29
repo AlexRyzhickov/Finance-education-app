@@ -29,9 +29,9 @@ class ResetPasswordFragment : Fragment() {
         }
 
         binding.resetPassBtn.setOnClickListener {
-            if (!binding.email.text.toString().equals("")){
+            if (!binding.email.text.toString().trim().equals("")){
 
-                val emailAddress = binding.email.text.toString()
+                val emailAddress = binding.email.text.toString().trim()
                 auth.sendPasswordResetEmail(emailAddress)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
