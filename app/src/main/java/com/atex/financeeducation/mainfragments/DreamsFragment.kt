@@ -2,6 +2,7 @@ package com.atex.financeeducation.mainfragments
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -9,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.atex.financeeducation.R
 import com.atex.financeeducation.adapters.SliderAdapter
 import com.atex.financeeducation.data.DreamItem
+import com.atex.financeeducation.enums.Articles
 import com.atex.financeeducation.viewmodel.CommonViewModel
 import com.example.androidkeyboardstatechecker.showToast
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -46,6 +48,12 @@ class DreamsFragment : Fragment(R.layout.dreams_fragment), SliderAdapter.OnItemC
             val action = DreamsFragmentDirections.actionDreamsFragmentToAddDreamFragment()
             findNavController().navigate(action)
         }
+
+        view.findViewById<ImageView>(R.id.article_dreams_btn).setOnClickListener {
+            val action = DreamsFragmentDirections.actionDreamsFragmentToArticleFragment(Articles.DREAMS)
+            findNavController().navigate(action)
+        }
+
     }
 
     override fun onStart() {

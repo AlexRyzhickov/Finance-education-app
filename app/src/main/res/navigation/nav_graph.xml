@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_budgetFragment_to_transactionFragment"
             app:destination="@id/transactionFragment" />
+        <action
+            android:id="@+id/action_budgetFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
     <fragment
         android:id="@+id/diaryFragment"
@@ -21,6 +24,9 @@
         <action
             android:id="@+id/action_diaryFragment_to_addNoteFragment"
             app:destination="@id/addNoteFragment" />
+        <action
+            android:id="@+id/action_diaryFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
     <fragment
         android:id="@+id/dreamsFragment"
@@ -32,6 +38,9 @@
         <action
             android:id="@+id/action_dreamsFragment_to_goalsFragment"
             app:destination="@id/goalsFragment" />
+        <action
+            android:id="@+id/action_dreamsFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
     <fragment
         android:id="@+id/goalsFragment"
@@ -58,6 +67,9 @@
         <argument
             android:name="imgUrl"
             app:argType="string" />
+        <action
+            android:id="@+id/action_goalsFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
@@ -157,5 +169,13 @@
         <action
             android:id="@+id/action_userInformFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.atex.financeeducation.mainfragments.ArticleFragment"
+        android:label="ArticleFragment" >
+        <argument
+            android:name="articleType"
+            app:argType="com.atex.financeeducation.enums.Articles" />
     </fragment>
 </navigation>

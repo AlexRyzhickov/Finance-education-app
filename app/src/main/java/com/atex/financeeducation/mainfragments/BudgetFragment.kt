@@ -15,6 +15,7 @@ import com.atex.financeeducation.R
 import com.atex.financeeducation.adapters.ChapterAdapter
 import com.atex.financeeducation.data.*
 import com.atex.financeeducation.databinding.BudgetFragmentBinding
+import com.atex.financeeducation.enums.Articles
 import com.atex.financeeducation.enums.Expenses
 import com.atex.financeeducation.interfaces.AutorizationInterface
 import com.atex.financeeducation.interfaces.ChangeBottomNavView
@@ -87,6 +88,11 @@ class BudgetFragment : Fragment() {
             )
         }
 
+        binding.articleBudgetBtn.setOnClickListener {
+            val action = BudgetFragmentDirections.actionBudgetFragmentToArticleFragment(Articles.BUDGET)
+            findNavController().navigate(action)
+        }
+
         activity?.let {
             instantiateNavigationInterface(it)
         }
@@ -113,7 +119,6 @@ class BudgetFragment : Fragment() {
                         it.getUntouchablePercentages()
                     view.findViewById<TextView>(R.id.daily_procent).text = it.getDailyPercentages()
                 }
-
             }
     }
 

@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.atex.financeeducation.R
 import com.atex.financeeducation.adapters.GoalsAdapter
 import com.atex.financeeducation.data.GoalItem
+import com.atex.financeeducation.enums.Articles
 import com.atex.financeeducation.interfaces.ChangeBottomNavView
 import com.atex.financeeducation.viewmodel.CommonViewModel
 import com.example.androidkeyboardstatechecker.showToast
@@ -48,8 +50,14 @@ class GoalsFragment : Fragment(R.layout.goals_fragment), GoalsAdapter.OnGoalClic
 
         view.findViewById<TextView>(R.id.dreamName).text = "Мечта: ${args.dreamName}"
         view.findViewById<TextView>(R.id.dreamDate).text = "Дата создания: ${args.createDate}"
+
         view.findViewById<Button>(R.id.deleteDream).setOnClickListener {
             getDream(args.dreamCost)
+        }
+
+        view.findViewById<ImageView>(R.id.article_goals_btn).setOnClickListener {
+            val action = GoalsFragmentDirections.actionGoalsFragmentToArticleFragment(Articles.GOALS)
+            findNavController().navigate(action)
         }
 
         activity?.let {

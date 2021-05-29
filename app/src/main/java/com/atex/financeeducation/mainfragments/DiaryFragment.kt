@@ -14,6 +14,7 @@ import com.atex.financeeducation.R
 import com.atex.financeeducation.adapters.NotesAdapter
 import com.atex.financeeducation.data.NoteItem
 import com.atex.financeeducation.databinding.DiaryFragmentBinding
+import com.atex.financeeducation.enums.Articles
 import com.atex.financeeducation.enums.Expenses
 import com.atex.financeeducation.viewmodel.CommonViewModel
 import com.example.androidkeyboardstatechecker.showToast
@@ -60,6 +61,11 @@ class DiaryFragment : Fragment(R.layout.diary_fragment) {
 
         binding.addNoteBtn.setOnClickListener {
             val action = DiaryFragmentDirections.actionDiaryFragmentToAddNoteFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.articleNotesBtn.setOnClickListener {
+            val action = DiaryFragmentDirections.actionDiaryFragmentToArticleFragment(Articles.DAIRY)
             findNavController().navigate(action)
         }
 
