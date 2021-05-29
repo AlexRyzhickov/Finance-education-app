@@ -92,13 +92,6 @@ class BudgetFragment : Fragment() {
             instantiateNavigationInterface(it)
         }
 
-        binding.goOutBtn.setOnClickListener {
-            authInterface.signOut()
-            val action = BudgetFragmentDirections.actionBudgetFragmentToSignInFragment()
-            findNavController().navigate(action)
-            changeBotNavViewInterface.hideBottomNavView()
-        }
-
         return binding.root
     }
 

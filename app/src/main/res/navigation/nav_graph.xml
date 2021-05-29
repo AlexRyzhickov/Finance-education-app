@@ -13,11 +13,6 @@
         <action
             android:id="@+id/action_budgetFragment_to_transactionFragment"
             app:destination="@id/transactionFragment" />
-        <action
-            android:id="@+id/action_budgetFragment_to_signInFragment"
-            app:destination="@id/signInFragment"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/diaryFragment"
@@ -154,5 +149,13 @@
         <argument
             android:name="storeId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInformFragment"
+        android:name="com.atex.financeeducation.mainfragments.UserInformFragment"
+        android:label="UserInformFragment" >
+        <action
+            android:id="@+id/action_userInformFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
 </navigation>

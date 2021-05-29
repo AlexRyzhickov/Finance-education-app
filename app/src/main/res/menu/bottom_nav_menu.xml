@@ -14,8 +14,8 @@
         android:icon="@drawable/dreams_selector"
         android:title="Мои мечты" />
 
-<!--    <item-->
-<!--        android:id="@+id/goalsFragment"-->
-<!--        android:icon="@drawable/goals_selector"-->
-<!--        android:title="Шаги к цели" />-->
+    <item
+        android:id="@+id/userInformFragment"
+        android:icon="@drawable/user_selector"
+        android:title="Пользователь" />
 </menu>
