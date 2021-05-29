@@ -83,6 +83,9 @@
             app:destination="@id/budgetFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_signInFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -178,4 +181,8 @@
             android:name="articleType"
             app:argType="com.atex.financeeducation.enums.Articles" />
     </fragment>
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.atex.financeeducation.authentication.ResetPasswordFragment"
+        android:label="ResetPasswordFragment" />
 </navigation>

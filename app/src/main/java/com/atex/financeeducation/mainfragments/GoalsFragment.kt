@@ -138,27 +138,54 @@ class GoalsFragment : Fragment(R.layout.goals_fragment), GoalsAdapter.OnGoalClic
                         context?.showToast("Средств не достачно")
                     } else {
 
-                        users.document(viewModel.email)
-                            .update("funds", fundsValue - dreamCost)
-                        viewModel.deleteDream(getDreamDocId())
-                        context?.showToast("Поздравляю, ваша мечта осуществилась")
+                        var countDoneGoals: Int = 0
+                        val goalsReference = users.document(viewModel.email).collection("dreams").document(getDreamDocId()).collection("goals")
 
-                        val action = GoalsFragmentDirections.actionGoalsFragmentToReceivingFragment(
-                            dreamName = args.dreamName,
-                            dreamCost = args.dreamCost,
-                            dreamImgUrl = args.imgUrl,
-                            storeId = getStoredId()
-                        )
+                        goalsReference
+                            .whereEqualTo("done", true)
+                            .get()
+                            .addOnSuccessListener { goalDoneDocuments ->
+                                countDoneGoals = goalDoneDocuments.size()
 
-                        findNavController().navigate(action)
-                        isClickOpenAddGoal = true
+                                goalsReference.get().addOnSuccessListener { goalDocuments ->
+                                    if (goalDocuments.size() >= 1){
+                                        if (goalDocuments.size() == countDoneGoals){
+                                            users.document(viewModel.email)
+                                                .update("funds", fundsValue - dreamCost)
+                                            viewModel.deleteDream(getDreamDocId())
+                                            context?.showToast("Поздравляю, ваша мечта осуществилась")
+
+                                            val action =
+                                                GoalsFragmentDirections.actionGoalsFragmentToReceivingFragment(
+                                                    dreamName = args.dreamName,
+                                                    dreamCost = args.dreamCost,
+                                                    dreamImgUrl = args.imgUrl,
+                                                    storeId = getStoredId()
+                                                )
+
+                                            findNavController().navigate(action)
+                                            isClickOpenAddGoal = true
+                                        }else{
+                                            context?.showToast("Вы не выполнили все цели !")
+                                        }
+                                    }else{
+                                        context?.showToast("Вы не задали ни одной цели !")
+                                    }
+                                }
+                            }
+                            .addOnFailureListener { exception ->
+
+                            }
                     }
-
                 }
             }
             .addOnFailureListener { exception ->
 
             }
+    }
+
+    private fun checkDoneAllGoal(){
+
     }
 
     private fun getDreamDocId(): String{

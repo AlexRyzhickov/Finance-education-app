@@ -33,11 +33,17 @@ class SignInFragment : Fragment() {
             findNavController().navigate(action)
         }
 
+        binding.openResPassFragmentBtn.setOnClickListener {
+            val action = SignInFragmentDirections.actionSignInFragmentToResetPasswordFragment()
+            findNavController().navigate(action)
+        }
+
         binding.signInBtn.setOnClickListener {
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
             authInterface.signIn(email, password)
         }
+
 
         return binding.root
     }
