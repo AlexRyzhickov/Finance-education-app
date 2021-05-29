@@ -57,13 +57,8 @@ class DiaryFragment : Fragment(R.layout.diary_fragment) {
             androidx.lifecycle.Observer<List<NoteItem>> { topics ->
                 adapter.setNotesList(topics)
             })
-        /*viewModel.getTopics(args.chapterId).observe(viewLifecycleOwner,
-            androidx.lifecycle.Observer<List<TopicItem>> { topics ->
-                adapter.setTopicList(topics)
-            })*/
 
         binding.addNoteBtn.setOnClickListener {
-//            val action = BudgetFragmentDirections.actionBudgetFragmentToTransactionFragment(expense, money, procent)
             val action = DiaryFragmentDirections.actionDiaryFragmentToAddNoteFragment()
             findNavController().navigate(action)
         }

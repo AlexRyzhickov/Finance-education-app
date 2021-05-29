@@ -28,7 +28,6 @@ import com.google.firebase.ktx.Firebase
 
 class BudgetFragment : Fragment() {
 
-    //    private val list = ArrayList<DreamItem>()
     private lateinit var adapter: ChapterAdapter
     private lateinit var recyclerView: RecyclerView
 
@@ -113,12 +112,6 @@ class BudgetFragment : Fragment() {
                     view.findViewById<TextView>(R.id.untouchable_procent).text =
                         it.getUntouchablePercentages()
                     view.findViewById<TextView>(R.id.daily_procent).text = it.getDailyPercentages()
-//                binding.fundsAmount.setText(it.funds.toString() + " р.")
-//                binding.untouchableAmount.setText(it.untouchable.toString() + " р.")
-//                binding.dailyAmount.setText(it.daily.toString() + " р.")
-//                binding.procent1.setText(it.getFundsPercentages())
-//                binding.procent2.setText(it.getUntouchablePercentages())
-//                binding.procent3.setText(it.getDailyPercentages())
                 }
 
             }

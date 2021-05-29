@@ -37,18 +37,6 @@ class NotesAdapter(
             holder.note_2.justificationMode = LineBreaker.JUSTIFICATION_MODE_INTER_WORD
             holder.note_3.justificationMode = LineBreaker.JUSTIFICATION_MODE_INTER_WORD
         }
-
-
-//        if (currentItem.dreamName.length <= 15) {
-//            holder.name.text = currentItem.dreamName
-//        }else{
-//            holder.name.text = currentItem.dreamName.substring(0,12) + ".."
-//        }
-//        Glide
-//            .with(context)
-//            .load(currentItem.imgUrl)
-//            .into(holder.img);
-
     }
 
     override fun getItemCount(): Int {

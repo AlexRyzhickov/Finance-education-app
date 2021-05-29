@@ -85,7 +85,6 @@ class UserInformFragment : Fragment(R.layout.user_inform_fragment) {
             changeBotNavViewInterface.hideBottomNavView()
         }
 
-
     }
 
     private fun instantiateNavigationInterface(context: FragmentActivity) {

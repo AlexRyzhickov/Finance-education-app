@@ -33,9 +33,6 @@ class ChangeAmountFragment : Fragment(), KeybordStateListener {
     ): View? {
         _binding = ChangeAmountFragmentBinding.inflate(inflater, container, false)
 
-//        val expense = args.expenseName
-
-//        textField = rootView.findViewById(R.id.textField)
         binding.textField.setStartIconTintList(null)
 
         when (args.changeState) {

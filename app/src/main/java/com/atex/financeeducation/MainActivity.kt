@@ -78,49 +78,7 @@ class MainActivity : AppCompatActivity(), AutorizationInterface, ChangeBottomNav
             val navController = navHostFragment.navController
             navController.setGraph(graph, intent.extras)
         }
-
-
-        /*  mAuth.createUserWithEmailAndPassword(email, password)
-              .addOnCompleteListener(this) { task ->
-                  if (task.isSuccessful) {
-                      // Sign in success, update UI with the signed-in user's information
-                      Log.d(TAG, "createUserWithEmail:success")
-                      val user = auth.currentUser
-                      updateUI(user)
-                  } else {
-                      // If sign in fails, display a message to the user.
-                      Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                      Toast.makeText(baseContext, "Authentication failed.",
-                          Toast.LENGTH_SHORT).show()
-                      updateUI(null)
-                  }
-              }*/
-
-        /*mAuth.signInWithCustomToken(mCustomToken)
-            .addOnCompleteListener(
-                this
-            ) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("TAG", "signInWithCustomToken:success")
-                    val user = mAuth.currentUser
-//                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("TAG", "signInWithCustomToken:failure", task.exception)
-                    Toast.makeText(
-                        this, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-//                    updateUI(null)
-                }
-            }*/
     }
-
-//    override fun onSupportNavigateUp(): Boolean {
-//        onBackPressed()
-//        return super.onSupportNavigateUp()
-//    }
 
     override fun onStart() {
         super.onStart()
@@ -214,7 +172,6 @@ class MainActivity : AppCompatActivity(), AutorizationInterface, ChangeBottomNav
                 !it
             }?.let {
                 showBottomNavView()
-//                super.onBackPressed()
             }
         }
     }
