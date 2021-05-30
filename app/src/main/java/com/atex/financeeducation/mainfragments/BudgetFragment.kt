@@ -29,8 +29,8 @@ import com.google.firebase.ktx.Firebase
 
 class BudgetFragment : Fragment() {
 
-    private lateinit var adapter: ChapterAdapter
-    private lateinit var recyclerView: RecyclerView
+//    private lateinit var adapter: ChapterAdapter
+//    private lateinit var recyclerView: RecyclerView
 
     private var _binding: BudgetFragmentBinding? = null
     private val binding get() = _binding!!
@@ -58,11 +58,11 @@ class BudgetFragment : Fragment() {
             .setQuery(query, DreamItem::class.java)
             .build()
 
-        adapter = ChapterAdapter(this, options)
-        recyclerView = binding.recycler
-        recyclerView.adapter = adapter
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.layoutManager = layoutManager
+//        adapter = ChapterAdapter(this, options)
+//        recyclerView = binding.recycler
+//        recyclerView.adapter = adapter
+//        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+//        recyclerView.layoutManager = layoutManager
 
         binding.cardView.setOnClickListener {
             openTransactionFragment(
@@ -141,14 +141,14 @@ class BudgetFragment : Fragment() {
         _binding = null
     }
 
-    override fun onStart() {
-        super.onStart()
-        adapter.startListening()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        adapter.stopListening()
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        adapter.startListening()
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        adapter.stopListening()
+//    }
 
 }

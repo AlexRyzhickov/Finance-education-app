@@ -13,6 +13,7 @@ import com.google.firebase.firestore.MetadataChanges
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import android.net.Uri
+import android.util.Log
 import com.atex.financeeducation.data.GoalItem
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.ktx.Firebase
@@ -132,7 +133,7 @@ class CommonViewModel() : ViewModel() {
         return userInf
     }
 
-    fun createDream(dreamName: String, dreamCost: Int, link: String, uri: Uri) {
+    fun createDream(dreamName: String, dreamCost: Int, link: String, uri: Uri, context: Context?) {
         val currentDate = Date()
         val dateFormat: DateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         val timeFormat: DateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
@@ -158,8 +159,12 @@ class CommonViewModel() : ViewModel() {
                 users.document(this.email).collection("dreams").document(docId)
                     .set(DreamItem(dreamName, dreamCost, downloadUri.toString(), link, date, time))
             } else {
-
+                context?.showToast("Вашу мечту не удалось создать, проверьте подключение")
             }
+        }.addOnFailureListener { exceptioan ->
+//            Log.d("LOAD_IMG_FAIL",exceptioan.toString())
+        }.addOnCanceledListener {
+            context?.showToast("Вашу мечту не удалось создать, проверьте подключение")
         }
 
     }
@@ -194,7 +199,10 @@ class CommonViewModel() : ViewModel() {
             }
     }
 
-    fun deleteDream(docId: String){
+    fun deleteDream(docId: String, goalDocRefs: ArrayList<DocumentReference>){
+        for (doc in goalDocRefs) {
+            doc.delete()
+        }
         users.document(this.email).collection("dreams").document(docId).delete()
     }
 

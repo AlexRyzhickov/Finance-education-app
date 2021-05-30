@@ -52,7 +52,8 @@ class AddDreamFragment : Fragment(R.layout.add_dream_fragment) {
                             dreamName.text.toString(),
                             dreamCost.text.toString().toInt(),
                             dreamLink.text.toString(),
-                            it
+                            it,
+                            context
                         )
                     }
                     findNavController().popBackStack()

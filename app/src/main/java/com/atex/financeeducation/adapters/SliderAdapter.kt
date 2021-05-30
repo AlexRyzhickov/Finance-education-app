@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.atex.financeeducation.R
 import com.atex.financeeducation.data.DreamItem
 import com.bumptech.glide.Glide
+import com.example.androidkeyboardstatechecker.showToast
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.DocumentReference
+import java.lang.Exception
 
 
 class SliderAdapter(
@@ -48,18 +50,20 @@ class SliderAdapter(
             .into(holder.slideImageView);
 
         holder.linkBtn.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(model.link))
-            startActivity(context!!, browserIntent, null)
+            try {
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(model.link))
+                startActivity(context!!, browserIntent, null)
+            }
+            catch (e: Exception) {
+                context?.showToast("Не удалось перейти по ссылке")
+            }
+
         }
 
         holder.goalsBtn.setOnClickListener {
             listener.onItemClick(model.createDate, model.createTime, model.dreamName, model.dreamCost, model.imgUrl)
         }
 
-    }
-
-    fun getItemRef(position: Int): DocumentReference {
-        return getSnapshots().getSnapshot(position).getReference()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

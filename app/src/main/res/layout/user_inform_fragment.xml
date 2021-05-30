@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="Инфрмация о пользователе"
+        android:text="Информация о пользователе"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -53,16 +53,6 @@
         android:text="Желаний: 10"
         app:layout_constraintStart_toStartOf="@+id/count_notes"
         app:layout_constraintTop_toBottomOf="@+id/count_notes" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Исполнено желаний: 12"
-        app:layout_constraintStart_toStartOf="@+id/count_dreams"
-        app:layout_constraintTop_toBottomOf="@+id/count_dreams"
-        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/user_name"

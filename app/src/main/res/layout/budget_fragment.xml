@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="25 %"
+                android:text="0.00 %"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/funds_amount"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +72,7 @@
                 android:id="@+id/funds_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="25 000 р."
+                android:text="0 р."
                 app:layout_constraintBottom_toBottomOf="@+id/img1"
                 app:layout_constraintStart_toStartOf="@+id/funds_title"
                 app:layout_constraintTop_toBottomOf="@+id/funds_title" />
@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="55 %"
+                android:text="0.00 %"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/daily_amount"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +134,7 @@
                 android:id="@+id/daily_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="25 000 р."
+                android:text="0.00 р."
                 app:layout_constraintBottom_toBottomOf="@+id/img3"
                 app:layout_constraintStart_toStartOf="@+id/title3"
                 app:layout_constraintTop_toBottomOf="@+id/title3" />
@@ -186,7 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="55 %"
+                android:text="0.00 %"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/untouchable_amount"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -196,33 +196,12 @@
                 android:id="@+id/untouchable_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="15 000 р."
+                android:text="0.00 р."
                 app:layout_constraintBottom_toBottomOf="@+id/img2"
                 app:layout_constraintStart_toStartOf="@+id/title2"
                 app:layout_constraintTop_toBottomOf="@+id/title2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="Мои мечты"
-        android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:paddingStart="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <ImageView
         android:id="@+id/article_budget_btn"

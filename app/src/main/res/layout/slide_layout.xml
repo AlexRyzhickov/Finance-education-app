@@ -56,24 +56,24 @@
 
             <Button
                 android:id="@+id/linkBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="в магазин"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:text="ссылка"
+                app:layout_constraintEnd_toEndOf="@+id/goalsBtn"
+                app:layout_constraintStart_toStartOf="@+id/goalsBtn"
                 app:layout_constraintTop_toBottomOf="@+id/receiving_dream_cost" />
 
             <Button
                 android:id="@+id/goalsBtn"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Мои цели"
+                android:text="Шаги к цели"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/linkBtn"
-                app:layout_constraintStart_toStartOf="@+id/linkBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linkBtn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

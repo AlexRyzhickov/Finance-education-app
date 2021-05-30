@@ -22,6 +22,7 @@ import com.atex.financeeducation.viewmodel.CommonViewModel
 import com.example.androidkeyboardstatechecker.showToast
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -56,7 +57,8 @@ class GoalsFragment : Fragment(R.layout.goals_fragment), GoalsAdapter.OnGoalClic
         }
 
         view.findViewById<ImageView>(R.id.article_goals_btn).setOnClickListener {
-            val action = GoalsFragmentDirections.actionGoalsFragmentToArticleFragment(Articles.GOALS)
+            val action =
+                GoalsFragmentDirections.actionGoalsFragmentToArticleFragment(Articles.GOALS)
             findNavController().navigate(action)
         }
 
@@ -139,7 +141,8 @@ class GoalsFragment : Fragment(R.layout.goals_fragment), GoalsAdapter.OnGoalClic
                     } else {
 
                         var countDoneGoals: Int = 0
-                        val goalsReference = users.document(viewModel.email).collection("dreams").document(getDreamDocId()).collection("goals")
+                        val goalsReference = users.document(viewModel.email).collection("dreams")
+                            .document(getDreamDocId()).collection("goals")
 
                         goalsReference
                             .whereEqualTo("done", true)
@@ -148,11 +151,11 @@ class GoalsFragment : Fragment(R.layout.goals_fragment), GoalsAdapter.OnGoalClic
                                 countDoneGoals = goalDoneDocuments.size()
 
                                 goalsReference.get().addOnSuccessListener { goalDocuments ->
-                                    if (goalDocuments.size() >= 1){
-                                        if (goalDocuments.size() == countDoneGoals){
+                                    if (goalDocuments.size() >= 1) {
+                                        if (goalDocuments.size() == countDoneGoals) {
                                             users.document(viewModel.email)
                                                 .update("funds", fundsValue - dreamCost)
-                                            viewModel.deleteDream(getDreamDocId())
+                                            viewModel.deleteDream(getDreamDocId(),getAllGoalDocRef())
                                             context?.showToast("Поздравляю, ваша мечта осуществилась")
 
                                             val action =
@@ -165,10 +168,10 @@ class GoalsFragment : Fragment(R.layout.goals_fragment), GoalsAdapter.OnGoalClic
 
                                             findNavController().navigate(action)
                                             isClickOpenAddGoal = true
-                                        }else{
+                                        } else {
                                             context?.showToast("Вы не выполнили все цели !")
                                         }
-                                    }else{
+                                    } else {
                                         context?.showToast("Вы не задали ни одной цели !")
                                     }
                                 }
@@ -184,15 +187,20 @@ class GoalsFragment : Fragment(R.layout.goals_fragment), GoalsAdapter.OnGoalClic
             }
     }
 
-    private fun checkDoneAllGoal(){
-
+    private fun getAllGoalDocRef(): ArrayList<DocumentReference> {
+        val countElements = goalAdapter.itemCount
+        val goalDocRefs = arrayListOf<DocumentReference>()
+        for (i in 0..countElements-1) {
+            goalDocRefs.add(goalAdapter.getItemRef(i))
+        }
+        return goalDocRefs
     }
 
-    private fun getDreamDocId(): String{
+    private fun getDreamDocId(): String {
         return "${args.dreamName}-${args.createDate}-${args.createTime}"
     }
 
-    private fun getStoredId(): String{
+    private fun getStoredId(): String {
         return "${viewModel.email}/${getDreamDocId()}"
     }
 
